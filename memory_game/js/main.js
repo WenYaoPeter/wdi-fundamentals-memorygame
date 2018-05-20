@@ -43,6 +43,8 @@ var checkForMatch = function() {
 	}
 };
 
+
+
 var flipCard = function(){ 
 	var cardId = this.getAttribute('data-id');
 	console.log("User flipped " + cards[cardId].rank);
@@ -56,16 +58,17 @@ if (cardsInPlay.length === 2) {
 } 
 
 };
-
 var flipBack = function() {
-	/*for (var i = 0; i < cards.length; i++){
-	var backImages = document.getElementsByTagName('div')[0].getAttribute('data-id', i);
-		backImages.setAttribute('src', 'images/back.png');
-	}*/
+
 	document.getElementsByTagName('img')[0].setAttribute('src', 'images/back.png');
+	document.getElementsByTagName('img')[1].setAttribute('src', 'images/back.png');
+	document.getElementsByTagName('img')[2].setAttribute('src', 'images/back.png');
+	document.getElementsByTagName('img')[3].setAttribute('src', 'images/back.png');
 
 };
-flipBack();
+//flipBack();
+
+
 var createBoard = function() {
 	for (var i = 0; i < cards.length; i++) {
 		var cardElement = document.createElement('img');
@@ -73,12 +76,16 @@ var createBoard = function() {
 		cardElement.setAttribute('data-id', i);
 		cardElement.addEventListener('click', flipCard);
 		document.getElementById('game-board').appendChild(cardElement);
+		
 		var reset = document.getElementById('resetButton');
+		reset.setAttribute('data-id', i);
 		reset.innerHTML = "Reset!";
 		reset.addEventListener('click', flipBack);
 	}
 };
 createBoard();
+
+
 
 
 
