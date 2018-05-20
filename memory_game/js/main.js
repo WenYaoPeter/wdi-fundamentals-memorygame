@@ -17,7 +17,7 @@ var cards = [
 {
 	rank : "queen",
 	suit : "diamonds",
-	cardImage : "image/queen-of-diamonds.png"
+	cardImage : "images/queen-of-diamonds.png"
 },
 
 {
@@ -43,19 +43,48 @@ var checkForMatch = function() {
 	}
 };
 
-var flipCard = function (cardId){ 
-	
+var flipCard = function(){ 
+	var cardId = this.getAttribute('data-id');
 	console.log("User flipped " + cards[cardId].rank);
 	cardsInPlay.push(cards[cardId].rank); 
-
 	console.log(cards[cardId].cardImage);
 	console.log(cards[cardId].suit);
-
+	this.setAttribute('src', cards[cardId].cardImage);
 
 if (cardsInPlay.length === 2) {
 	checkForMatch();
-}
+} 
 
 };
-flipCard(0);
-flipCard(3);
+
+var flipBack = function() {
+	/*for (var i = 0; i < cards.length; i++){
+	var backImages = document.getElementsByTagName('div')[0].getAttribute('data-id', i);
+		backImages.setAttribute('src', 'images/back.png');
+	}*/
+	document.getElementsByTagName('img')[0].setAttribute('src', 'images/back.png');
+
+};
+flipBack();
+var createBoard = function() {
+	for (var i = 0; i < cards.length; i++) {
+		var cardElement = document.createElement('img');
+		cardElement.setAttribute('src', 'images/back.png');
+		cardElement.setAttribute('data-id', i);
+		cardElement.addEventListener('click', flipCard);
+		document.getElementById('game-board').appendChild(cardElement);
+		var reset = document.getElementById('resetButton');
+		reset.innerHTML = "Reset!";
+		reset.addEventListener('click', flipBack);
+	}
+};
+createBoard();
+
+
+
+/*var resetImages = function(){
+	var reset = document.getElementById('resetButton');
+	reset.innerHTML = "Reset!";
+	reset.addEventListener('click', flipBack);
+};
+resetImages();*/
